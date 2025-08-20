@@ -1,26 +1,68 @@
-# Running the test network
+# Test Network for Proof of Collaborative Learning (PoCL)
 
-You can use the `./network.sh` script to stand up a simple Fabric test network. The test network has two peer organizations with one peer each and a single node raft ordering service. You can also use the `./network.sh` script to create channels and deploy chaincode. For more information, see [Using the Fabric test network](https://hyperledger-fabric.readthedocs.io/en/latest/test_network.html). The test network is being introduced in Fabric v2.0 as the long term replacement for the `first-network` sample.
+This directory contains the Hyperledger Fabric blockchain network configuration and deployment scripts for the Proof of Collaborative Learning (PoCL) system. It provides the blockchain infrastructure that supports the federated learning consensus mechanism.
 
-If you are planning to run the test network with consensus type BFT then please pass `-bft` flag as input to the `network.sh` script when creating the channel. Note that currently this sample does not yet support the use of consensus type BFT and CA together.
-That is to create a network use:
+## Overview
+
+The test network provides:
+- **Blockchain Infrastructure**: Hyperledger Fabric network with peers and orderers
+- **Channel Management**: Multiple channels for different types of transactions
+- **Chaincode Deployment**: Automated deployment of all PoCL chaincodes
+- **Network Lifecycle**: Scripts for starting, stopping, and managing the network
+
+## Network Architecture
+
+### Organizations
+- **Org1**: Primary organization with peers and certificate authority
+- **Org2**: Secondary organization for multi-org scenarios
+- **OrdererOrg**: Ordering service organization
+
+### Channels
+- **demo**: Channel for demo transactions, model proposals, predictions, and votes
+- **main**: Channel for main cryptocurrency transactions and rewards
+
+### Deployed Chaincodes
+1. **demoCC**: Demo transaction management (demo channel)
+2. **modelCC**: Model proposal handling (demo channel)
+3. **predCC**: Prediction management (demo channel)
+4. **voteCC**: Voting system (demo channel)
+5. **mainCC**: Main wallet operations (main channel)
+
+## Quick Start for PoCL
+
+### Complete System Startup
+The `start.sh` script provides one-command deployment of the entire PoCL blockchain infrastructure:
+
 ```bash
-./network.sh up -bft
+./start.sh
 ```
 
-To create a channel use:
+This script automatically:
+1. Starts the Hyperledger Fabric network
+2. Creates demo and main channels
+3. Deploys all 5 PoCL chaincodes
+4. Initializes the blockchain for federated learning
+
+### Manual Network Management
+You can also use the standard `network.sh` script for individual operations:
 
 ```bash
-./network.sh createChannel -bft
+# Start network infrastructure
+./network.sh up
+
+# Create channels
+./network.sh createChannel -c demo
+./network.sh createChannel -c main
+
+# Deploy individual chaincodes
+./network.sh deployCC -ccp ../demo-coin-transfer/demo-coin-transfer-chaincode \
+  -ccn demoCC -c demo -ccl javascript
+
+# Stop and clean network
+./network.sh down
 ```
 
-To restart a running network use:
-
-```bash
-./network.sh restart -bft
-```
-
-Note that running the createChannel command will start the network, if it is not already running.
+## Prerequisites
 
 Before you can deploy the test network, you need to follow the instructions to [Install the Samples, Binaries and Docker Images](https://hyperledger-fabric.readthedocs.io/en/latest/install.html) in the Hyperledger Fabric documentation.
 
