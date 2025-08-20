@@ -268,12 +268,13 @@ npm test
 If you use this work in your research, please cite our paper:
 
 ```bibtex
-@article{sokhankhosh2024proof,
-  title={Proof of Collaborative Learning: A Multi-winner Federated Learning Consensus Mechanism},
-  author={Sokhankhosh, Amirreza and others},
-  journal={IEEE Conference Proceedings},
+@inproceedings{sokhankhosh2024proof,
+  title={Proof-of-Collaborative-Learning: A Multi-winner Federated Learning Consensus Algorithm},
+  author={Sokhankhosh, Amirreza and Rouhani, Sara},
+  booktitle={2024 IEEE International Conference on Blockchain (Blockchain)},
+  pages={370--377},
   year={2024},
-  doi={10.1109/...}
+  organization={IEEE}
 }
 ```
 
