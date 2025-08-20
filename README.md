@@ -8,7 +8,7 @@ In PoCL, miners train global deep learning model using their local datasets. Aft
 
 The figure below illustrates the high-level architecture of PoCL.
 
-![Design](./figures/Design%201.png "Title")
+![Design](./figures/Design.png "Title")
 
 This implementaiton is based on a rudimentary cryptocurrency blockchain in which users propose transfer transactions. 
 ## Installation
